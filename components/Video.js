@@ -19,17 +19,13 @@ const usePlayableVideo = () => {
 	return { videoRef, onVideoPress };
 };
 
-const Video = () => {
+const Video = ({ video: { messages, url, likes, shares, description, channel, song } }) => {
 	const { videoRef, onVideoPress } = usePlayableVideo();
 
 	return (
 		<div className={styles.video}>
-			<video
-				className={styles.videoPlayer}
-				src="/videos/tiktok01.mp4"
-				ref={videoRef}
-				onClick={onVideoPress}></video>
-			<VideoSidebar />
+			<video className={styles.videoPlayer} src={url} ref={videoRef} onClick={onVideoPress}></video>
+			<VideoSidebar likes={likes} shares={shares} messages={messages} />
 		</div>
 	);
 };

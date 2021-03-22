@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import MessageIcon from "@material-ui/icons/Message";
 import ShareIcon from "@material-ui/icons/Share";
 import styles from "../styles/VideoSidebar.module.css";
-import { StayCurrentLandscapeSharp } from "@material-ui/icons";
 
-const useLikes = () => {
-	const [likes, setLikes] = React.useState(300);
-	const [liked, setLiked] = React.useState(false);
+const useLikes = ({ existingLikes }) => {
+	const [likes, setLikes] = useState(existingLikes);
+	const [liked, setLiked] = useState(false);
 
-	const likeVideo = React.useCallback(() => {
+	const likeVideo = useCallback(() => {
 		if (!liked) {
 			setLikes(likes + 1);
 			setLiked(true);
@@ -22,8 +21,12 @@ const useLikes = () => {
 	return { likes, liked, likeVideo };
 };
 
-const VideoSidebar = () => {
-	const { likes, liked, likeVideo } = useLikes();
+const VideoSidebar = ({
+	likes: existingLikes,
+	shares: existingShares,
+	messages: existingMessages,
+}) => {
+	const { likes, liked, likeVideo } = useLikes({ existingLikes });
 
 	return (
 		<div className={styles.sidebar}>
@@ -37,11 +40,11 @@ const VideoSidebar = () => {
 			</div>
 			<div className={styles.button}>
 				<MessageIcon fontSize="large" />
-				<p className={styles.amount}>300</p>
+				<p className={styles.amount}>{existingMessages}</p>
 			</div>
 			<div className={styles.button}>
 				<ShareIcon fontSize="large" />
-				<p className={styles.amount}>300</p>
+				<p className={styles.amount}>{existingShares}</p>
 			</div>
 		</div>
 	);

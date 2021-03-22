@@ -14,9 +14,29 @@
 	align-items: center;
 }
 
+.window {
+	box-sizing: border-box;
+	width: 336px;
+	height: 600px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	scroll-snap-type: y mandatory;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+.window::-webkit-scrollbar {
+	display: none;
+}
+
+.inner {
+	height: 1200px;
+}
+
 .item {
 	box-sizing: border-box;
 	width: 336px;
 	height: 600px;
 	background: rgba(255, 213, 70, 0.4);
+	scroll-snap-align: start;
 }

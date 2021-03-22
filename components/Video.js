@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import styles from "../styles/Video.module.css";
+import VideoSidebar from "./VideoSidebar";
 
 const usePlayableVideo = () => {
 	const [playing, setPlaying] = useState(false);
@@ -28,6 +29,7 @@ const Video = () => {
 				src="/videos/tiktok01.mp4"
 				ref={videoRef}
 				onClick={onVideoPress}></video>
+			<VideoSidebar />
 		</div>
 	);
 };
